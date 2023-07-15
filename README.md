@@ -95,8 +95,6 @@ Additionally, it requires a single host organism in FASTA format for analysis.
 In instances  where the header of the FASTA files is excessively long for figures, employing the ``sep`` function can facilitate the separation of the header, thereby enhancing its visualization.
 
 ```{r}
-
-############# FOR US: separate the fasta files into parasite and human
 fasta.files <- list.files("flu fasta/", pattern = ".fasta", full.names = T) #parasite.fasta
 
 list.virus <- read.virus(fasta.files, sep = "|")
@@ -159,7 +157,6 @@ As a demonstration, we can determine the GC content for each of the viruses exam
 
 ```{r}
 GC.list <- GC.content(list.virus)
-saveRDS(GC.list, "result/GC.content.virus.RDS") # FOR US: remove this
 head(GC.list$`Influenza A H`)
 ```
 
@@ -170,10 +167,7 @@ This package incorporates two distinct methods for calculating the effective num
 ```{r}
 
 enc.list <- ENc.values.old(list.virus)
-saveRDS(enc.list, "result/ENCold.virus.RDS")
-
 head(enc.list$`Influenza A NH`)
-
 ```
 
 Furthermore, the package includes an alternative approach introduced by researcher Mathieu Joron Novembre to calculate ENc. This approach, known as Novembre's equation, employs the formula ENc = (2 / (Σ((f_i)^2 + 1/Nc))). Here, ENc represents the effective number of codons, f_i represents the frequency of the i-th synonymous codon, Σ denotes the summation across all synonymous codons, and Nc represents the total number of codons in the coding sequence. The implementation of this calculation is available as ``ENc.values.new`` within the package. This function has a parameter ``genetic.code`` to identify a specific genetic code for different organisms. 
@@ -205,13 +199,9 @@ alt.init Logical, whether to use alternative initiation codons. Default is TRUE.
 ```{r}
 
 MILC.list.virus <- MILC.values(list.virus)
-saveRDS(MILC.list.virus, "result/MILC.virus.RDS")
-
 head(MILC.list.virus$`Influenza A NH`)
 
 MILC.list.host <- MILC.values(theHost)
-saveRDS(MILC.list.host, "result/MILC.Host.RDS")
-
 head(MILC.list.host$Human)
 
 ```
@@ -238,16 +228,10 @@ These indices include:
 ```{r}
 
 cai.list <- CAI.values(list.virus, host = theHost)
-saveRDS(cai.list, "result/CAI.virus.usingHost.RDS")
-
 head(cai.list$`Influenza A H`)
 
 melp.list <- MELP.values(list.virus, host = theHost)
-saveRDS(melp.list, "result/MELP.virus.usingHost.RDS")
-
-
 head(melp.list$`Influenza D NH`)
-
 ```
 
 **NOTE;**
@@ -259,63 +243,40 @@ head(melp.list$`Influenza D NH`)
 ``RSCU.values`` To calculate the Relative synonymous codon usage. This function can be used for the parasites and the host.
 
 ```{r}
-
 rscu.virus <- RSCU.values(list.virus)
-saveRDS(rscu.virus, "result/RSCU.virus.RDS")
 
 rscu.host <- RSCU.values(theHost)
-saveRDS(rscu.host, "result/RSCU.Host.RDS")
-
 ```
 
 ``SiD.list`` To calculate similarity index between the RSCU of the parasites and the host. This function can be used only for parasites.
 
 ```{r}
 SiD <-  SiD.list(RSCU.host = rscu.host, RSCU.virus = rscu.virus ) 
-
-saveRDS(SiD, "result/SiD.virus.usingHost.RDS")
 head(SiD)
 ```
-
-
 ```RCDI.calc``` To calculate Relative codon deoptimization index. This function requires the usage of ``ENc.values.old``.
-
-
 ```{r}
-
 enc.host <- ENc.values.old(theHost)
-saveRDS(enc.host, "result/ENC.host.RDS")
-
 rcdi <- RCDI.calc(list.virus , theHost, rscu.host, enc.host)
-saveRDS(rcdi, "result/RCDI.virus.usingHost.RDS")
-
 ```
 
-
 ``dinuc.base`` A statistical dinucleotide over- and underrepresentation using base model.
-
 
 ```{r eval=FALSE}
 base <- dinuc.base(list.virus, permutations = 100)
 
 ```
 
-
 ``dinuc.codon`` A statistical dinucleotide over- and underrepresentation using codon model.
-
 
 ```{r eval=FALSE}
 codon <- dinuc.codon(list.virus, permutations = 100)
-
 ```
-
 
 ``dinuc.syncodon`` A statistical dinucleotide over- and underrepresentation using synonymous codons model.
 
-
 ```{r eval=FALSE}
 syncodon <- dinuc.syncodon(list.virus, permutations = 100)
-
 ```
 
 
@@ -455,6 +416,13 @@ rscu.cluster(rscu.virus, rscu.host, k = 2, rank = 2)
 ```
 
 # Contribution Guidelines
+
+For bugs and suggestions, the most effective way is by raising an issue on the github issue tracker. 
+Github allows you to classify your issues so that we know if it is a bug report, feature request or feedback to the authors.
+
+If you wish to contribute some changes to the code then you should submit a [pull request](https://github.com/AliYoussef96/parazitCUB/pulls)
+How to create a Pull Request? [documentation on pull requests](https://help.github.com/en/articles/about-pull-requests)
+
 
 # Citation
 
