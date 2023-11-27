@@ -8,6 +8,8 @@
 
 - Building upon this foundation, we have recently introduced an updated version of the vhcub package, now named parazitCUB. This new version expands the scope of investigation from virus-host interactions to encompass the interplay between parasites and their hosts in codon usage bias (CUB).
 
+- https://f1000research.com/articles/12-1431
+
 # The update from vhcub to parazitCUB package:
 
 - rectifying any bugs present in vhcub, ensuring improved functionality.
@@ -426,3 +428,4 @@ How to create a Pull Request? [documentation on pull requests](https://help.gith
 
 # Citation
 
+Anwar AM, Bayoumi S, Elzalabany S et al. parazitCUB: An R package to streamline the process of investigating the adaptations of parasites' codon usage bias [version 1; peer review: 1 approved]. F1000Research 2023, 12:1431 (https://doi.org/10.12688/f1000research.143223.1)
