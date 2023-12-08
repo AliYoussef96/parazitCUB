@@ -8,7 +8,7 @@
 
 - Building upon this foundation, we have recently introduced an updated version of the vhcub package, now named parazitCUB. This new version expands the scope of investigation from virus-host interactions to encompass the interplay between parasites and their hosts in codon usage bias (CUB).
 
-- https://f1000research.com/articles/12-1431
+- For more information about ParazitCUB: https://f1000research.com/articles/12-1431
 
 # The update from vhcub to parazitCUB package:
 
